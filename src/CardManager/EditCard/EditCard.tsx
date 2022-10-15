@@ -1,21 +1,21 @@
-import React, { Fragment, useCallback, useEffect, useState } from 'react';
-import { Button, Col, Container, Row } from 'react-bootstrap';
-import { useNavigate, useParams } from 'react-router-dom';
-import Card from '../../components/Card';
-import CardForm from '../../components/CardForm';
+import React, { Fragment, useCallback, useEffect, useState } from "react";
+import { Button, Col, Container, Row } from "react-bootstrap";
+import { useNavigate, useParams } from "react-router-dom";
+import Card from "../../components/Card";
+import CardForm from "../../components/CardForm";
 import {
   CreditCard,
   fetchCreditCardList,
   updateLocalStorageCards,
-} from '../CreditCard';
+} from "../CreditCard";
 
 const initialState: CreditCard = {
-  id: '',
-  cardNumber: '',
-  cardHolder: '',
-  cardMonth: '',
-  cardYear: '',
-  cardCvv: '',
+  id: "",
+  cardNumber: "",
+  cardHolder: "",
+  cardMonth: "",
+  cardYear: "",
+  cardCvv: "",
 };
 
 export default function EditCard() {
@@ -42,10 +42,10 @@ export default function EditCard() {
     (keyName, value) => {
       setState({
         ...state,
-        [keyName]: value || '',
+        [keyName]: value || "",
       });
     },
-    [state],
+    [state]
   );
 
   function handleSubmitAction() {
@@ -56,7 +56,7 @@ export default function EditCard() {
       const selectedCardIndex = cards.indexOf(selectedCard);
       cards[selectedCardIndex] = state;
       updateLocalStorageCards(cards);
-      navigate('/');
+      navigate("/");
     } catch (error: any) {
       alert(error);
       console.log(error);
@@ -67,7 +67,9 @@ export default function EditCard() {
 
   function handleDeleteAction() {
     try {
-      if (confirm('Are you sure you want to delete this card?') === false) {
+      if (
+        window.confirm("Are you sure you want to delete this card?") === false
+      ) {
         return;
       }
 
@@ -77,7 +79,7 @@ export default function EditCard() {
       const selectedCardIndex = cards.indexOf(selectedCard);
       cards.splice(selectedCardIndex, 1);
       updateLocalStorageCards(cards);
-      navigate('/');
+      navigate("/");
     } catch (error: any) {
       alert(error);
       console.log(error);
@@ -113,7 +115,7 @@ export default function EditCard() {
             <div className="d-grid gap-1 delete-card">
               <Button variant="link" size="lg" onClick={handleDeleteAction}>
                 Delete Card
-              </Button>{' '}
+              </Button>{" "}
             </div>
           </Col>
         </Row>

@@ -25,10 +25,6 @@ export default function EditCard() {
   const [cardsData, setCardsData] = useState<CreditCard[]>([]);
   const [isCardFlipped, setIsCardFlipped] = useState(false);
 
-  useEffect(() => {
-    fetchData();
-  }, [parmId]);
-
   async function fetchData() {
     const cards: CreditCard[] = await fetchCreditCardList();
     setCardsData(cards);
@@ -37,6 +33,10 @@ export default function EditCard() {
       setState(selectedCard ?? initialState);
     }
   }
+
+  useEffect(() => {
+    fetchData();
+  }, [parmId]);
 
   const updateStateValues = useCallback(
     (keyName, value) => {

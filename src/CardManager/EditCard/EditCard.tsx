@@ -25,16 +25,24 @@ export default function EditCard() {
   const [cardsData, setCardsData] = useState<CreditCard[]>([]);
   const [isCardFlipped, setIsCardFlipped] = useState(false);
 
-  async function fetchData() {
-    const cards: CreditCard[] = await fetchCreditCardList();
-    setCardsData(cards);
-    if (cards && cards.length > 0) {
-      const selectedCard = cards.find((card) => card.id === parmId);
-      setState(selectedCard ?? initialState);
-    }
-  }
+  // async function fetchData() {
+  //   const cards: CreditCard[] = await fetchCreditCardList();
+  //   setCardsData(cards);
+  //   if (cards && cards.length > 0) {
+  //     const selectedCard = cards.find((card) => card.id === parmId);
+  //     setState(selectedCard ?? initialState);
+  //   }
+  // }
 
   useEffect(() => {
+    async function fetchData() {
+      const cards: CreditCard[] = await fetchCreditCardList();
+      setCardsData(cards);
+      if (cards && cards.length > 0) {
+        const selectedCard = cards.find((card) => card.id === parmId);
+        setState(selectedCard ?? initialState);
+      }
+    }
     fetchData();
   }, [parmId]);
 
